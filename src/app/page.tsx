@@ -21,42 +21,41 @@ export default function Home() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    
+
     // Basic email validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address");
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      // In a real application, you would send this to your backend
       console.log("Email submitted:", email);
     }, 1500);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black">
       <div className="w-full max-w-md mx-auto animate-in fade-in duration-500">
-        <Card className="w-full">
-          <CardHeader className="text-center">
-            <div className="mb-4 flex justify-center">
-              <div className="bg-primary/10 p-3 rounded-full">
+        <Card className="w-full bg-gray-900 shadow-xl rounded-lg border border-gray-800 p-8">
+          <CardHeader className="text-center font-anton">
+            <div className="mb-8">
+              <div className="bg-gray-800 p-5 rounded-full mx-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-primary"
+                  className="text-gray-400"
                 >
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                   <path d="m9 22 3-7 3 7" />
@@ -64,65 +63,70 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <CardTitle className="text-3xl font-bold tracking-tight">
-              FixItEnzo
+            <CardTitle className="text-4xl text-gray-100 font-anton">
+              Fix It Enzo
             </CardTitle>
-            <CardDescription className="mt-2 text-center max-w-sm mx-auto">
-              Your smart home repair assistant is coming soon. Be the first to know when we launch!
+            <CardDescription className="mt-4 text-gray-400 font-geist-sans">
+              The Next Generation repair tool for professionals and DIY-ers.
+              Build anything and fix everything.
             </CardDescription>
           </CardHeader>
           <CardContent>
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-3">
                   <Input
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    className={error ? "border-destructive" : ""}
+                    className={`bg-gray-800 text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-primary focus:outline-none ${
+                      error ? "border-red-500" : "border-gray-700"
+                    }`}
                     aria-invalid={!!error}
                   />
                   {error && (
-                    <p className="text-destructive text-sm">{error}</p>
+                    <p className="text-red-500 text-sm">{error}</p>
                   )}
                 </div>
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full bg-primary text-gray-900 hover:bg-primary/90 disabled:opacity-50"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Saving..." : "Notify Me"}
                 </Button>
               </form>
             ) : (
-              <div className="text-center py-4 animate-in fade-in duration-300">
-                <div className="bg-primary/10 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+              <div className="text-center py-8">
+                <div className="bg-gray-800 mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-primary"
+                    className="text-gray-400"
                   >
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                     <polyline points="22 4 12 14.01 9 11.01" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold">Thanks for signing up!</h3>
-                <p className="text-muted-foreground mt-1">
+                <h3 className="text-2xl font-semibold text-gray-100">
+                  Thanks for signing up!
+                </h3>
+                <p className="text-gray-400 mt-2">
                   We&apos;ll notify you as soon as FixItEnzo launches.
                 </p>
               </div>
             )}
           </CardContent>
-          <CardFooter className="flex justify-center text-sm text-muted-foreground">
+          <CardFooter className="flex justify-center text-sm text-gray-500 mt-6">
             <p>© 2025 FixItEnzo. All rights reserved.</p>
           </CardFooter>
         </Card>

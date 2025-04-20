@@ -24,6 +24,11 @@ const config = {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
+        fontFamily: {
+          anton: ['var(--font-anton)'],
+          sans: ['var(--font-geist-sans)'],
+          mono: ['var(--font-geist-mono)'],
+        },
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
